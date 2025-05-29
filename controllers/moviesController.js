@@ -1,5 +1,7 @@
+// import db
 const connection = require("../data/db_copia");
 
+// index
 const index = (req, res) => {
   const sql = "SELECT * FROM movies";
 
@@ -12,6 +14,7 @@ const index = (req, res) => {
   })
 }
 
+// show
 const show = (req, res) => {
   const { id } = req.params;
 
@@ -42,7 +45,7 @@ const show = (req, res) => {
         })
       movie.reviews = reviewsResult;
 
-      res.json(movie)
+      res.json({ ...movie, image: req.imagePath + movie.image });
     })
 
   })
