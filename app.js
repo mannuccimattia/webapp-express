@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 })
 
 // use router
-app.use("/movies", moviesRouter);
+app.use("/api/movies", moviesRouter);
 
 // use middlewares
 app.use(errorsHandler);
