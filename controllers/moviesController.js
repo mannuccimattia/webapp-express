@@ -1,5 +1,5 @@
 // import db
-const connection = require("../data/db_copia");
+const connection = require("../data/db");
 
 // import function queryFailed
 const queryFailed = require("../functions/queryFailed");

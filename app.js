@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.SERVER_PORT || 3000;
 
 // import router
 const moviesRouter = require("./routers/moviesRouter");
