@@ -17,13 +17,36 @@ const show = (req, res) => {
 
   const movieSql = `SELECT * FROM movies WHERE id = ?`;
 
+  const reviewsSql = `
+  SELECT * 
+  FROM movies M
+  JOIN reviews R ON M.id = R.movie_id
+  WHERE M.id = ? 
+  `
+
   connection.query(movieSql, [id], (err, movieResult) => {
-    if (err) return res.status(500).json({
-      error: "DB query failed: " + err
+    if (err)
+      return res.status(500).json({
+        error: "DB query failed: " + err
+      })
+    if (movieResult.length === 0 || movieResult[0].id === null)
+      return res.status(404).json({
+        error: "Movie not Found"
+      })
+    const movie = movieResult[0];
+
+    connection.query(reviewsSql, [id], (err, reviewsResult) => {
+      if (err)
+        return res.status(500).json({
+          error: "DB query failed: " + err
+        })
+      movie.reviews = reviewsResult;
+
+      res.json(movie)
     })
 
-    res.json(movieResult);
   })
+
 }
 
 module.exports = { index, show }
