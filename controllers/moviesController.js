@@ -13,7 +13,17 @@ const index = (req, res) => {
 }
 
 const show = (req, res) => {
-  res.send("DEttaglio libro");
+  const { id } = req.params;
+
+  const movieSql = `SELECT * FROM movies WHERE id = ?`;
+
+  connection.query(movieSql, [id], (err, movieResult) => {
+    if (err) return res.status(500).json({
+      error: "DB query failed: " + err
+    })
+
+    res.json(movieResult);
+  })
 }
 
 module.exports = { index, show }
