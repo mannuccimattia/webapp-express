@@ -36,6 +36,7 @@ const show = (req, res) => {
   WHERE M.id = ? 
   `
 
+  // movies query
   connection.query(movieSql, [id], (err, movieResult) => {
     if (err) return queryFailed(err, res);
     if (movieResult.length === 0 || movieResult[0].id === null)
@@ -44,15 +45,14 @@ const show = (req, res) => {
       });
     const movie = movieResult[0];
 
+    // reviews query
     connection.query(reviewsSql, [id], (err, reviewsResult) => {
       if (err) return queryFailed(err, res);
       movie.reviews = reviewsResult;
 
       res.json({ ...movie, image: req.imagePath + movie.image });
     })
-
   })
-
 }
 
 module.exports = { index, show }
