@@ -9,8 +9,13 @@ const index = (req, res) => {
     if (err) return res.status(500).json({
       error: "DB query failed: " + err
     })
+    const movies = moviesResult.map(movie => {
+      const mov = { ...movie, image: req.imagePath + movie.image };
 
-    res.json(moviesResult);
+      return mov;
+    });
+
+    res.json(movies);
   })
 }
 
@@ -18,7 +23,10 @@ const index = (req, res) => {
 const show = (req, res) => {
   const { id } = req.params;
 
-  const movieSql = `SELECT * FROM movies WHERE id = ?`;
+  const movieSql = `SELECT M.*, ROUND(AVG(R.vote)) AS average_vote
+  FROM movies M 
+  JOIN reviews R ON M.id = R.movie_id
+  WHERE M.id = ?`;
 
   const reviewsSql = `
   SELECT * 

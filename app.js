@@ -26,12 +26,12 @@ app.get("/", (req, res) => {
   res.send("Movies API server");
 })
 
+// use router
+app.use("/movies", moviesRouter);
+
 // use middlewares
 app.use(errorsHandler);
 app.use(notFound);
-
-// use router
-app.use("/movies", moviesRouter);
 
 // leave on listen
 app.listen(port, () => {
