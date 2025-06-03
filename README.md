@@ -1,4 +1,4 @@
-### ESERCIZIO: Setup Web App Express
+### ESERCIZIO: Setup Web App Express (Parte 1)
 
 repo: `webapp-express`
 
@@ -11,11 +11,7 @@ Ciao ragazzi, è ora di mettere alla prova le vostre conoscenze iniziando a cost
 - Prepariamo una rotta index per ottenere la lista dei film
 - Prepariamo una rotta show per ottenere i dettagli di un singolo film e le sue recensioni
 
----
-
 *(Numero minimo di push: da oggi non vi comunicherò il numero minimo di push, dovendo lavorare su più giorni sulla stessa repo)*
-
----
 
 #### Bonus
 - Inserire delle immagini nel progetto express e dunque nel db
@@ -26,3 +22,23 @@ Ciao ragazzi, è ora di mettere alla prova le vostre conoscenze iniziando a cost
 - Inserire un middleware per la gestione errori
 - Creare un middleware per le immagini
 - Mostrare la media delle recensioni nel dettaglio del libro
+
+---
+
+### ESERCIZIO: Setup Web App React (Parte 2)
+
+repo: `webapp-react` e `webapp-express`
+
+#### MILESTONE 1
+
+- Configuriamo l’app di backend (repo webapp-express) a ricevere chiamate dalla nostra applicazione React, installando e impostando il middleware CORS (npm i cors)
+- Installate axios nell'app frontend e provate quindi ad effettuare una chiamata Ajax dalla home del progetto React, per ottenere la lista dei libri
+
+#### MILESTONE 2
+
+- In ultimo, effettuiamo una chiamata AJAX dalla pagina di dettaglio per ottenere il dettaglio di un singolo film, comprese le sue recensioni
+
+#### Bonus
+
+- Realizzare una componente StarsRating in cui mostrare il voto delle recensioni (magari anche il voto medio, chissà....)
+- Curare l’aspetto estetico della vostra applicazione
