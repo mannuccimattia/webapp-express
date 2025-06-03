@@ -1,6 +1,14 @@
 const express = require("express");
 const app = express();
-const port = process.env.SERVER_PORT || 3000;
+
+// destructuring process.env
+const { SERVER_PORT, FE_APP } = process.env;
+
+// set port
+const port = SERVER_PORT || 3000;
+
+// import CORS
+const cors = require("cors");
 
 // import router
 const moviesRouter = require("./routers/moviesRouter");
@@ -10,6 +18,8 @@ const errorsHandler = require("./middlewares/errorsHandler");
 const notFound = require("./middlewares/notFound");
 const imagePathMiddleware = require("./middlewares/imagePath");
 
+// use CORS
+app.use(cors({ origin: FE_APP }));
 
 // set ./public as static 
 app.use(express.static("public"));
