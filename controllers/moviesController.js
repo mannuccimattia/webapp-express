@@ -55,4 +55,25 @@ const show = (req, res) => {
   })
 }
 
-module.exports = { index, show }
+// store review
+const storeReview = (req, res) => {
+  const { id } = req.params;
+
+  const { text, name, vote } = req.body;
+
+  const sql = `
+  INSERT INTO reviews (text, name, vote, movie_id)
+  VALUES (?,?,?,?)
+  `;
+
+  connection.query(sql, [text, name, vote, id], (err, reviewResult) => {
+    if (err) return queryFailed(err, res);
+
+    res.status(201).json({
+      message: "Review added successfully",
+      id: reviewResult.insertId
+    });
+  });
+};
+
+module.exports = { index, show, storeReview }
