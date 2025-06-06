@@ -6,7 +6,11 @@ const queryFailed = require("../functions/queryFailed");
 
 // index
 const index = (req, res) => {
-  const sql = "SELECT * FROM movies";
+  const sql = (
+    !req.query.search
+      ? "SELECT * FROM movies"
+      : "SELECT * FROM movies WHERE title LIKE '%" + req.query.search + "%'"
+  );
 
   connection.query(sql, (err, moviesResult) => {
     if (err) return queryFailed(err, res);
